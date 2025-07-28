@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  reactStrictMode: true,
   trailingSlash: true,
   eslint: {
     ignoreDuringBuilds: true,
@@ -12,9 +12,10 @@ const nextConfig = {
     unoptimized: true,
     domains: ["placeholder.svg"],
   },
-  assetPrefix: process.env.NODE_ENV === "production" ? "" : "",
+  assetPrefix: "",
   basePath: "",
-  distDir: "out",
-}
+  // output: "export", // ❌ bunu kaldırdık çünkü API route'larla çakışıyor
+  distDir: ".next", // ✅ SSR build klasörü
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
