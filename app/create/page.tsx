@@ -6,9 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Heart, Upload, CheckCircle, ArrowLeft, Star, Clock, Users } from "lucide-react"
+import { Heart, CheckCircle, ArrowLeft, Star, Clock, Users } from "lucide-react"
 import Link from "next/link"
 
 export default function CreatePage() {
@@ -41,7 +40,7 @@ export default function CreatePage() {
 
       if (response.ok) {
         setIsSuccess(true)
-        // Send email notification
+        // Email notification gönderme
         await fetch("/api/email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -68,14 +67,14 @@ export default function CreatePage() {
               <CheckCircle className="h-8 w-8 text-green-500" />
             </div>
             <CardTitle className="text-2xl text-green-600">Siparişiniz Alındı! 🎉</CardTitle>
-            <CardDescription className="text-center">
+            <CardDescription>
               Sevgilinize özel siteniz 24 saat içinde hazır olacak. Email adresinize bilgilendirme göndereceğiz.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 p-4 rounded-lg text-left">
               <h4 className="font-semibold text-blue-800 mb-2">📧 Sonraki Adımlar:</h4>
-              <ul className="text-sm text-blue-700 space-y-1 text-left">
+              <ul className="text-sm text-blue-700 space-y-1">
                 <li>• Email adresinizi kontrol edin</li>
                 <li>• WhatsApp üzerinden fotoğraf linki gelecek</li>
                 <li>• 24 saat içinde siteniz hazır olacak</li>
@@ -211,100 +210,43 @@ export default function CreatePage() {
                     }`}
                     onClick={() => handleInputChange("package", "basic")}
                   >
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h3 className="font-semibold text-lg">Temel Paket</h3>
-                        <p className="text-gray-600 text-sm">Aşkınızın ilk adımı için</p>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-3xl font-bold text-pink-500">₺100</span>
-                        <p className="text-sm text-gray-500">tek seferlik</p>
-                      </div>
-                    </div>
-                    <ul className="text-sm text-gray-600 space-y-2">
+                    <h3 className="text-lg font-semibold mb-2">Basic</h3>
+                    <p className="mb-2">Hızlı ve uygun fiyatlı</p>
+                    <ul className="text-sm text-gray-600 space-y-1">
                       <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />5 fotoğraf
+                        <Users className="mr-1 h-4 w-4 text-purple-500" /> 1 Kişi İçin
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        Aşk hikayeniz
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        Mobil uyumlu tasarım
-                      </li>
-                      <li className="flex items-center">
-                        <Clock className="h-4 w-4 text-blue-500 mr-2" />
-                        24 saat teslimat
+                        <Clock className="mr-1 h-4 w-4 text-purple-500" /> 24 Saat Teslim
                       </li>
                     </ul>
                   </div>
 
                   <div
-                    className={`border-2 rounded-lg p-6 cursor-pointer transition-all relative ${
+                    className={`border-2 rounded-lg p-6 cursor-pointer transition-all ${
                       formData.package === "premium"
-                        ? "border-pink-500 bg-pink-50 shadow-lg"
-                        : "border-gray-200 hover:border-pink-300"
+                        ? "border-purple-500 bg-purple-50 shadow-lg"
+                        : "border-gray-200 hover:border-purple-300"
                     }`}
                     onClick={() => handleInputChange("package", "premium")}
                   >
-                    <Badge className="absolute -top-2 -right-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white">
-                      Popüler ⭐
-                    </Badge>
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h3 className="font-semibold text-lg">Premium Paket</h3>
-                        <p className="text-gray-600 text-sm">Tam aşk deneyimi için</p>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-3xl font-bold text-pink-500">₺150</span>
-                        <p className="text-sm text-gray-500">tek seferlik</p>
-                      </div>
-                    </div>
-                    <ul className="text-sm text-gray-600 space-y-2">
+                    <h3 className="text-lg font-semibold mb-2">Premium</h3>
+                    <p className="mb-2">Ekstra özellikler ile</p>
+                    <ul className="text-sm text-gray-600 space-y-1">
                       <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        Sınırsız fotoğraf
+                        <Users className="mr-1 h-4 w-4 text-pink-500" /> 2 Kişi İçin
                       </li>
                       <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        Video desteği
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        Müzik ekleme
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        Özel domain
-                      </li>
-                      <li className="flex items-center">
-                        <Clock className="h-4 w-4 text-blue-500 mr-2" />
-                        12 saat teslimat
+                        <Clock className="mr-1 h-4 w-4 text-pink-500" /> 12 Saat Teslim
                       </li>
                     </ul>
                   </div>
                 </div>
-
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-semibold text-blue-800 mb-2">💡 Hangi Paket Size Uygun?</h4>
-                  <ul className="text-sm text-blue-700 space-y-1">
-                    <li>
-                      <strong>Temel:</strong> Yeni çiftler, basit hikaye paylaşımı
-                    </li>
-                    <li>
-                      <strong>Premium:</strong> Evlilik, nişan, özel günler için
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
-                    Geri
-                  </Button>
+                <div className="flex justify-between">
+                  <Button onClick={() => setStep(1)}>Geri</Button>
                   <Button
                     onClick={() => setStep(3)}
-                    className="flex-1 bg-gradient-to-r from-pink-500 to-purple-500"
+                    className="bg-gradient-to-r from-pink-500 to-purple-500"
                     disabled={!formData.package}
                   >
                     Devam Et
@@ -318,10 +260,12 @@ export default function CreatePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center">
-                  <Users className="h-6 w-6 text-purple-500 mr-2" />
-                  Aşk Hikayeniz
+                  <Clock className="h-6 w-6 text-purple-500 mr-2" />
+                  Aşk Hikayeniz & Fotoğraf Sayısı
                 </CardTitle>
-                <CardDescription>Hikayenizi ve fotoğraflarınızı paylaşın</CardDescription>
+                <CardDescription>
+                  Bize aşk hikayenizi anlatın ve kaç fotoğraf paylaşmak istediğinizi seçin
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
@@ -330,69 +274,35 @@ export default function CreatePage() {
                     id="story"
                     value={formData.story}
                     onChange={(e) => handleInputChange("story", e.target.value)}
-                    placeholder="Nasıl tanıştınız? En güzel anınız nedir? İlk buluşmanız nasıldı? Hikayenizi detaylı anlatın..."
-                    rows={6}
+                    placeholder="Nasıl tanıştınız, güzel anılar..."
                     className="mt-1"
+                    rows={5}
                   />
-                  <p className="text-sm text-gray-500 mt-1">Detaylı hikaye, daha güzel bir site demek! ❤️</p>
                 </div>
 
                 <div>
-                  <Label htmlFor="photos">Kaç Fotoğrafınız Var?</Label>
-                  <Select onValueChange={(value) => handleInputChange("photos", Number.parseInt(value))}>
-                    <SelectTrigger className="mt-1">
-                      <SelectValue placeholder="Fotoğraf sayısını seçin" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="5">1-5 fotoğraf</SelectItem>
-                      <SelectItem value="10">6-10 fotoğraf</SelectItem>
-                      <SelectItem value="20">11-20 fotoğraf</SelectItem>
-                      <SelectItem value="50">20+ fotoğraf</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="photos">Kaç Fotoğraf Paylaşmak İstiyorsunuz? *</Label>
+                  <Input
+                    id="photos"
+                    type="number"
+                    min={0}
+                    max={10}
+                    value={formData.photos}
+                    onChange={(e) => handleInputChange("photos", Number(e.target.value))}
+                    className="mt-1"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">En fazla 10 fotoğraf ekleyebilirsiniz.</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg border border-blue-200">
-                  <div className="flex items-center mb-3">
-                    <Upload className="h-5 w-5 text-blue-500 mr-2" />
-                    <span className="font-medium text-blue-700">📸 Fotoğraf Gönderimi</span>
-                  </div>
-                  <p className="text-sm text-blue-600 mb-3">
-                    Siparişiniz onaylandıktan sonra size WhatsApp üzerinden güvenli fotoğraf yükleme linki göndereceğiz.
-                  </p>
-                  <div className="bg-white p-3 rounded border-l-4 border-l-green-400">
-                    <p className="text-sm text-green-700">
-                      <strong>✅ Güvenli:</strong> Fotoğraflarınız sadece sitenizde kullanılır, başka yerde paylaşılmaz.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Preview */}
-                <div className="bg-pink-50 p-4 rounded-lg">
-                  <h4 className="font-semibold text-pink-800 mb-2">🎯 Sitenizin Önizlemesi:</h4>
-                  <div className="text-sm text-pink-700 space-y-1">
-                    <p>
-                      <strong>Site Başlığı:</strong> {formData.customerName} & {formData.partnerName}
-                    </p>
-                    <p>
-                      <strong>Paket:</strong> {formData.package === "premium" ? "Premium (₺150)" : "Temel (₺100)"}
-                    </p>
-                    <p>
-                      <strong>Fotoğraf:</strong> {formData.photos} adet
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button variant="outline" onClick={() => setStep(2)} className="flex-1">
-                    Geri
-                  </Button>
+                <div className="flex justify-between">
+                  <Button onClick={() => setStep(2)}>Geri</Button>
                   <Button
                     onClick={handleSubmit}
-                    className="flex-1 bg-gradient-to-r from-pink-500 to-purple-500"
-                    disabled={isSubmitting || !formData.story}
+                    className="bg-gradient-to-r from-pink-500 to-purple-500"
+                    disabled={!formData.story || formData.photos < 0 || formData.photos > 10}
+                    isLoading={isSubmitting}
                   >
-                    {isSubmitting ? "Gönderiliyor..." : "Siparişi Tamamla 🎉"}
+                    Gönder
                   </Button>
                 </div>
               </CardContent>
